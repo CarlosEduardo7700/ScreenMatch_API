@@ -1,13 +1,21 @@
 package br.com.alura.screenmatch;
 
+import br.com.alura.screenmatch.service.ConsumirAPI;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ScreenmatchApplication {
+public class ScreenmatchApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ScreenmatchApplication.class, args);
 	}
 
+	@Override
+	public void run(String... args) throws Exception {
+		var consumirAPI = new ConsumirAPI();
+		var json = consumirAPI.obterDados("https://www.omdbapi.com/?t=gilmore+girls&apikey=3e4f916e");
+		System.out.println(json);
+	}
 }
